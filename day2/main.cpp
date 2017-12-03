@@ -5,8 +5,10 @@
 #include <sstream>
 #include <algorithm>
 
+// typedef cause tedious to type
 typedef std::vector<std::vector<int>> Rows;
 
+// returns rows from inputfile
 Rows readInput() {
 
     Rows rows;
@@ -30,6 +32,7 @@ Rows readInput() {
     return rows;
 }
 
+// calculate checkusum of rows
 int checksum(Rows rows) {
 
     int sum = 0;
@@ -53,6 +56,7 @@ int checksum(Rows rows) {
     return sum;
 }
 
+// checksum is the sum of each row's evenly divisible pair
 int checksum2(Rows rows) {
 
     int sum = 0;
