@@ -2,6 +2,7 @@
 #include <string>
 #include <cstdlib>
 
+// check two digits in a string. if equal: return digit, if not: 0
 int checkDigits(std::string s, int offset1, int offset2) {
     int digit1 = s[offset1] - '0';
     int digit2 = s[offset2] - '0';
@@ -9,6 +10,7 @@ int checkDigits(std::string s, int offset1, int offset2) {
     return digit1 == digit2 ? digit1 : 0;
 }
 
+// go through every pair in the sequence and increase sum when equal
 int part1(std::string s) {
 
     int sum = 0, digit1, digit2;
@@ -21,6 +23,7 @@ int part1(std::string s) {
     return sum;
 }
 
+// same as above, but pairs are located len/2 apart from each other
 int part2(std::string s) {
 
     int sum = 0, digit1, digit2;
@@ -41,10 +44,6 @@ int main() {
 
     std::cout << "Part 1: " << part1(input) << std::endl;
     std::cout << "Part 2: " << part2(input) << std::endl;
-
-
-
-    //doPart2();
 
     return 0;
 } 
