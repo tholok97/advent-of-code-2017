@@ -13,7 +13,7 @@ Rows readInput() {
 
     Rows rows;
 
-    std::ifstream ifs("input.txt");
+    std::ifstream ifs("day2/input.txt");
 
     std::string line;
     while (std::getline(ifs, line)) {
