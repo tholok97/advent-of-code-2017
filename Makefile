@@ -9,7 +9,7 @@ INCLUDE:= -Iinclude/
 
 EXE=main.out
 
-all: 1 2 3 4
+all: 1 2 3 4 5
 
 1:
 	$(info --------------------- DAY 1 ---------------------)
@@ -30,6 +30,11 @@ all: 1 2 3 4
 	$(info --------------------- DAY 4 ---------------------)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(wildcard day4/*.cpp) -o day4/$(EXE)
 	@day4/$(EXE)
+
+5:
+	$(info --------------------- DAY 5 ---------------------)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(wildcard day5/*.cpp) -o day5/$(EXE)
+	@day5/$(EXE)
 
 clean:
 	rm -rf $(wildcard day*/$(EXE))
