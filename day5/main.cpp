@@ -46,7 +46,7 @@ int part2(std::vector<int> offsets) {
 int main() {
 
     // get vector of offsets
-    auto offsets = readInput("day5/input.txt");  
+    auto offsets = readInput("input/input_day5.txt");  
 
     // do parts
     std::cout << "Part 1: " << part1(offsets) << std::endl;

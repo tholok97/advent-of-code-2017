@@ -86,7 +86,7 @@ int part2(std::vector<std::string> input) {
 int main() {
 
     // ..input relative to repo root
-    auto input = readInput("day4/input.txt");
+    auto input = readInput("input/input_day4.txt");
 
     std::cout << "Part 1: " << part1(input) << std::endl;
     std::cout << "Part 2: " << part2(input) << std::endl;
