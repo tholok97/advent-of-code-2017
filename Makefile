@@ -3,7 +3,7 @@
 # (jeg jørs på det)
 
 CC=g++
-CFLAGS= -w -std=c++11
+CFLAGS= -w -std=c++14
 INCLUDE= -Iinclude/
 
 DAYDIRS=$(sort $(wildcard day*))
