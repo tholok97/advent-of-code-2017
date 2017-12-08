@@ -1,8 +1,8 @@
 /*
  * WARNING! For your own safety, don't try and follow my solution to part 2 
     until I've cleaned it up. Currently it's a soup of sparsely commented and
-    barely woking code. You have been warned.... It works though. Gave me the 
-    answer and everything.
+    barely working code. You have been warned.... It works though. Gave me the 
+    answer and everything :D
  * Part 1 works and is reasonably commented.
  */
 
