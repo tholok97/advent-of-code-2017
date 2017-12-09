@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <stack>
 
 // do both part 1 and 2 in one function. .first will be answer to part 1 and
 //  .second will be answer to part 2
