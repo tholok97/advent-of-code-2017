@@ -4,7 +4,7 @@
 #include <algorithm>
 
 // represents the state of banks. typdefed cause use it all the time
-typedef std::vector<int> Banks;
+using Banks = std::vector<int>;
 
 int part1(Banks banks) {
 

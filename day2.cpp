@@ -6,7 +6,7 @@
 #include <algorithm>
 
 // typedef cause tedious to type
-typedef std::vector<std::vector<int>> Rows;
+using Rows = std::vector<std::vector<int>>;
 
 // returns rows from inputfile
 Rows readInput() {
