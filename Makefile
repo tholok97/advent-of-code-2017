@@ -1,5 +1,5 @@
 # Makefile for all days
-# NOTE: I'm still learning gnu make, so this stuff isn't optimal. 
+# NOTE: I'm still learning gnu make, so this stuff is probably not optimal. 
 # (jeg jørs på det)
 
 CC=g++
