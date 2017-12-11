@@ -10,7 +10,7 @@ DAYCPPS=$(sort $(wildcard day*.cpp))
 DAYEXES=$(patsubst day%.cpp,bin/day%.out,$(DAYCPPS))
 DAYNUMS=$(patsubst day%.cpp,%,$(DAYCPPS))
 
-all: $(DAYNUMS)
+all: $(DAYEXES)
 
 %: bin/day%.out
 	$(info ############################################## RUNNING $<)
