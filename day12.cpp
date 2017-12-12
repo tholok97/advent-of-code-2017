@@ -6,20 +6,20 @@
 #include <vector>
 #include <fstream>
 
-int count(std::map<int, std::vector<int>> neighborList, int curr) {
+using Node = std::pair<std::vector<int>, int>;
 
-    static std::set<int> seen;
+int count(std::map<int, Node> &nodes, int curr, int id) {
 
-    if (seen.find(curr) != seen.end()) {
-        return 0;
+    if (nodes[curr].second) {
+        return 0; 
     }
 
-    seen.insert(curr);
+    nodes[curr].second = id;
 
     int sum = 1;
 
-    for (auto i : neighborList[curr]) {
-        sum += count(neighborList, i);
+    for (auto i : nodes[curr].first) {
+        sum += count(nodes, i, id);
     }
 
     return sum;
@@ -27,7 +27,7 @@ int count(std::map<int, std::vector<int>> neighborList, int curr) {
 
 int main() {
 
-    std::map<int, std::vector<int>> neighborList;
+    std::map<int, Node> nodes;
 
     std::ifstream ifs("input/input_day12.txt");
 
@@ -39,9 +39,8 @@ int main() {
         int node;
         iss >> node; // read node
 
-        std::cout << node << " -- ";
 
-        neighborList[node];
+        nodes[node].second = 0;
 
         std::string dummyStr;
         iss >> dummyStr; // skip arrows
@@ -50,17 +49,23 @@ int main() {
         char dummyChar;
         while (iss >> neighbor) {
 
-            std::cout << neighbor << " ";
 
-            neighborList[node].push_back(neighbor);
+            nodes[node].first.push_back(neighbor);
             
             iss >> dummyChar;
         }
 
-        std::cout << std::endl;
     }
 
-    std::cout << count(neighborList, 0) << std::endl;
+    std::set<int> seen;
+
+    for (int i = 0; i < 2000; ++i) {
+        count(nodes, i, i+1);
+
+        seen.insert(nodes[i].second);
+    }
+
+    std::cout << seen.size() << std::endl;
 
     return 0;
 } 
