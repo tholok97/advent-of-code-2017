@@ -12,11 +12,11 @@ DAYNUMS=$(patsubst day%.cpp,%,$(DAYCPPS))
 
 all: $(DAYEXES)
 
-%: bin/day%.out
+%: bin/%.out
 	$(info ############################################## RUNNING $<)
 	$<
 
-bin/day%.out: day%.cpp
+bin/%.out: %.cpp
 	$(info ############################################## BUILDING $@)
 	$(CC) $(CFLAGS) $(INCLUDE) $(wildcard $<) -o $@
 
