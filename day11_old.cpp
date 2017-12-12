@@ -1,7 +1,7 @@
 /*
  * This was my first attempt. A (much faster) second attempt is found 
    in 'day11.cpp'. 
- * I Didn't find an easy way to do it by coordinates at first (which is what 
+ * I didn't find an easy way to do it by coordinates at first (which is what 
    'day11.cpp' does), so I made ended up solving it by optimalizing the path 
    given, and finding the length of the optimalized version. 
  * The meat of this solution is the 'shorten' function, that given a path gives 
@@ -108,6 +108,7 @@ std::pair<Path, Path> transformReplace(Path path, Transformation t) {
 Path shorten(Path path) {
 
     // transformations that apply to hex paths (found these with pen and paper)
+    // Form: { X, Y, Z } -> X and Y found in a path should be replaced by Y
     static std::array<Transformation, 7> transforms = {{
         {"n", "s", ""},
         {"ne", "nw", "n"},
