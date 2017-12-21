@@ -326,8 +326,8 @@ int main() {
 
     auto grid = generate("nbysizxe");
 
-    std::cout << numSet(grid) << std::endl;
-    std::cout << numRegions(grid) << std::endl;
+    std::cout << "Part 1: " << numSet(grid) << std::endl;
+    std::cout << "Part 2: " << numRegions(grid) << std::endl;
 
     return 0;
 } 
