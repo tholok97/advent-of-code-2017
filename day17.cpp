@@ -14,6 +14,9 @@ public:
         
     }
     void forward(int n) {
+        while (n > vec.size()) {
+            n -= vec.size();
+        }
         for (int i = 0; i < n; ++i) {
             ++it;
             if (it == vec.end()) {
@@ -46,6 +49,7 @@ int part1(int stepSize) {
     return sb.value();
 }
 
+/*
 int part2(int stepSize) {
 
     SpinlockBuffer sb;
@@ -67,6 +71,27 @@ int part2(int stepSize) {
     sb.forward(1);
 
     return sb.value();
+}
+*/
+
+int part2(int stepSize) {
+
+    int pos = 0;
+    unsigned long int numInsertions = 50000000;
+    int size = 1;
+    int result;
+
+    for (int i = 1; i <= numInsertions; ++i) {
+        pos = (pos + stepSize) % size;
+        pos++;
+        size++;
+
+        if (pos == 1) {
+            result = i; 
+        }
+    }
+
+    return result;
 }
 
 int main() {
