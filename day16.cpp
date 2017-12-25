@@ -90,7 +90,7 @@ std::vector<char> dance(std::vector<char> programs, std::string danceStr) {
 std::vector<char> superdance(std::vector<char> programs, std::string danceFile) {
 
     for (unsigned long long int i = 0; i < 1000000000; ++i) {
-        if (i % 100 == 0) std::cout << i << '\n';
+        if (i % 500 == 0) std::cout << i << '\n';
         programs = dance(programs, danceFile);
     }
     
