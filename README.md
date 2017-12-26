@@ -30,7 +30,7 @@ An empty `make` command will build all the days in sequence.
 | 15  | X             | X             |
 | 16  | X             | **WIP**       |
 | 17  | X             | X             |
-| 18  |               |               |
+| 18  | **WIP**       |               |
 | 19  |               |               |
 | 20  |               |               |
 | 21  |               |               |
