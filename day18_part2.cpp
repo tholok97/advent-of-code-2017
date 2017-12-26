@@ -31,15 +31,6 @@ Instructions read(std::string inputFile) {
     return instructions;
 }
 
-// Program contains the info associated with a program in part 2
-struct Program {
-    Registers regs;             // programs own registers
-    std::queue<int> received;   // values the program has received from other
-    bool waiting;               // is this program waiting?
-    int pos;                    // position in instructions
-    int numSent;                // number of sent values (for part 2)
-};
-
 // does this string represent an int?
 bool isInt(std::string str) {
     for (const char c : str) {
@@ -61,6 +52,16 @@ IntegerType parse(std::string str, Registers& regs) {
     }
 }
 
+//
+// Program contains the info associated with a program in part 2
+struct Program {
+    Registers regs;             // programs own registers
+    std::queue<int> received;   // values the program has received from other
+    bool waiting;               // is this program waiting?
+    int pos;                    // position in instructions
+    int numSent;                // number of sent values (for part 2)
+};
+
 // read and do next instruction on current.
 void doInstruction(Program& current, Program& other, const Instructions& 
         instructions) {
@@ -68,7 +69,7 @@ void doInstruction(Program& current, Program& other, const Instructions&
     // make string stream for parsing instruction
     std::istringstream iss(instructions[current.pos]);
 
-    // temps used for reading from file:
+    // temps used for reading instructions
     std::string tmpstr; 
     char tmpchar;      
 
