@@ -1,146 +1,166 @@
-// WIP WIP WIP WIP WIP WIP
-
 #include <iostream>
-#include <vector>
-#include <memory>
+#include <string>
 #include <map>
+#include <fstream>
+#include <vector>
+#include <sstream>
 
-using Registers = std::map<char, int>;
+using Instructions = std::vector<std::string>;
 
-struct Instruction;
+Instructions read(std::string inputFile) {
 
-struct SetVal;
-struct SetChar;
-struct AddVal;
-struct AddChar;
-struct MulVal;
-struct MulChar;
-struct ModVal;
-struct ModChar;
+    std::ifstream ifs(inputFile);
 
-struct SndVal;
-struct SndChar;
-struct RcvVal;
-struct RcvChar;
-struct JgzVal;
-struct JgzChar;
+    Instructions instructions;
 
-struct Instruction {
-    virtual int go(Registers& regs) = 0;
-};
-
-struct SetVal : Instruction {
-    char x;
-    int y;
-    SetVal(char x, int y) { x = x; y = y; }
-    virtual int go(Registers& regs) {
-        regs[x] = y;
+    std::string line;
+    while (getline(ifs, line)) {
+        instructions.push_back(line);
     }
-};
 
-struct SetChar : Instruction {
-    char x;
-    char y;
-    SetChar(char x, char y) { x = x; y = y; }
-    virtual int go(Registers& regs) {
-        regs[x] = regs[y];
+    return instructions;
+}
+
+using Registers = std::map<char, long long int>;
+
+bool isInt(std::string str) {
+    for (const char c : str) {
+        if ((c < '0' || c > '9') && c != '-') {
+            return false;
+        }
     }
-};
+    return true;
+}
 
-struct AddVal : Instruction {
-    char x;
-    int y;
-    AddVal(char x, int y) { x = x; y = y; }
-    virtual int go(Registers& regs) {
-        regs[x] += y;
+long long int parse(std::string str, Registers& regs) {
+    if (isInt(str)) {
+        return std::stoi(str);
+    } else {
+        return regs[str[0]];
     }
-};
+}
 
-struct AddChar : Instruction {
-    char x;
-    char y;
-    AddChar(char x, char y) { x = x; y = y; }
-    virtual int go(Registers& regs) {
-        regs[x] += regs[y];
+long long int part1(std::string inputFile) {
+
+    auto instructions = read(inputFile);
+
+    Registers regs;
+
+    bool recoverReached = false;
+
+    std::string tmpstr;
+    char tmpchar;
+
+    long long int lastFreq = -1;
+
+    int i = 0;
+    while (!recoverReached) {
+
+        std::cout << i << ": ";
+
+        std::istringstream iss(instructions[i]);
+
+        iss >> tmpstr;
+
+        //  (  can't switch on strings :((  )
+        if          (tmpstr == "snd") {
+            iss >> tmpstr;
+            long long int x = parse(tmpstr, regs);
+            lastFreq = x;
+
+            std::cout << "snd " << x;
+
+        } else if   (tmpstr == "set") {
+
+            iss >> tmpchar;
+            char x = tmpchar;
+            
+            iss >> tmpstr;
+            long long int y = parse(tmpstr, regs);
+
+            regs[x] = y;
+
+            std::cout << "set " << x << " " << y;
+
+        } else if   (tmpstr == "add") {
+
+            iss >> tmpchar;
+            char x = tmpchar;
+            
+            iss >> tmpstr;
+            long long int y = parse(tmpstr, regs);
+
+            regs[x] += y;
+
+            std::cout << "add " << x << " " << y;
+
+
+        } else if   (tmpstr == "mul") {
+
+            iss >> tmpchar;
+            char x = tmpchar;
+            
+            iss >> tmpstr;
+            long long int y = parse(tmpstr, regs);
+
+            regs[x] *= y;
+
+            std::cout << "mul " << x << " " << y;
+
+        } else if   (tmpstr == "mod") {
+
+            iss >> tmpchar;
+            char x = tmpchar;
+            
+            iss >> tmpstr;
+            long long int y = parse(tmpstr, regs);
+
+            regs[x] %= y;
+
+            std::cout << "mod " << x << " " << y;
+
+        } else if   (tmpstr == "rcv") {
+
+            iss >> tmpstr;
+            long long int x = parse(tmpstr, regs);
+
+            if (x) {
+                recoverReached = true;
+            }
+
+            std::cout << "rcv " << x;
+
+        } else if   (tmpstr == "jgz") {
+
+            iss >> tmpstr;
+            long long int x = parse(tmpstr, regs);
+
+            std::cout << "jgz " << x;
+
+            if (x > 0) {
+                iss >> tmpstr;
+                long long int y = parse(tmpstr, regs);
+
+                i += y - 1;
+
+                std::cout << " " << y;
+            }
+
+        } else {
+            std::cout << "ERROR: unknown instruction " << tmpstr << std::endl;
+        }
+
+        std::cout << "      a: " << regs['a'] << std::endl;
+
+        i += 1;
     }
-};
 
-struct MulVal : Instruction {
-    char x;
-    int y;
-    MulVal(char x, int y) { x = x; y = y; }
-    virtual int go(Registers& regs) {
-        regs[y] *= y;
-    }
-};
-
-struct MulChar : Instruction {
-    char x;
-    char y;
-    MulChar(char x, char y) { x = x; y = y; }
-    virtual int go(Registers& regs) {
-        regs[x] *= regs[y];
-    }
-};
-
-struct ModVal : Instruction {
-    char x;
-    int y;
-    ModVal(char x, int y) { x = x; y = y; }
-    virtual int go(Registers& regs) {
-        regs[y] %= y;
-    }
-};
-
-struct ModChar : Instruction {
-    char x;
-    char y;
-    ModChar(char x, char y) { x = x; y = y; }
-    virtual int go(Registers& regs) {
-        regs[x] %= regs[y];
-    }
-};
-
-struct SndVal {
-    int x;
-    SndVal(int x) { x = x; }
-    virtual int go(Registers& regs) {
-        return x;
-    }
-};
-
-struct SndChar {
-    char x;
-    SndChar(char x) { x = x; }
-    virtual int go(Registers& regs) {
-        return regs[x];
-    }
-};
-
-struct RcvVal {
-    int x;
-    RcvVal(int x) { x = x; }
-    virtual int go(Registers& regs) {
-
-    }
-};
-
-struct RcvChar;
-struct JgzVal;
-struct JgzChar;
+    return lastFreq;
+}
 
 int main() {
 
-    std::vector<std::unique_ptr<Instruction>> instructions;
-
-    instructions.push_back(std::make_unique<MulVal>('a', 3));
-
-    Registers regs;
-    for (auto& p : instructions) {
-        p->go(regs);
-    }
-
-    std::cout << "it's working" << std::endl; 
+    std::cout << "Part 1: " << part1("input/input_day18.txt") << std::endl;
 
     return 0;
 } 
